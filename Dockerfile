@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd 
 RUN  docker-php-ext-enable imagick \
-    && docker-php-ext-enable rewrite \
     && docker-php-ext-enable  memcached \
     && docker-php-ext-install -j$(nproc) soap \
     && docker-php-ext-install -j$(nproc) zip \
