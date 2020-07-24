@@ -1,4 +1,5 @@
 FROM php:7.4.8-apache
+RUN echo "memory_limit=512M" > $PHP_INI_DIR/conf.d/memory_limit.ini
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -18,4 +19,3 @@ RUN  docker-php-ext-enable imagick \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-install -j$(nproc) opcache
-
