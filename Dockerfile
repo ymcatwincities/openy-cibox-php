@@ -1,5 +1,5 @@
 FROM php:7.4.8-apache
-RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory_limit.ini
+
 RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libedit-dev \
     libzip-dev \
     git \
+    rsync \
     && apt-get -y clean && apt-get -y autoclean && pecl install imagick memcached \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd 
@@ -20,3 +21,4 @@ RUN  docker-php-ext-enable imagick \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
     && docker-php-ext-install -j$(nproc) opcache
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory_limit.ini
